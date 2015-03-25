@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="bower_components/threejs/build/three.js"></script>
+    <title></title>
+</head>
+<body>
+
+</body>
+<script>
+
+    var scene, camera, renderer, controls;
+    var geometry, material, mesh;
+
+    init();
+    animate();
+
+    function init() {
+            geometry = new THREE.PlaneGeometry(500, 200, 20, 10);
+            var X_OFFSET_DAMPEN = 0.5;
+            var Y_OFFSET_DAMPEN = 0.1;
+            var Z_OFFSET_DAMPEN = 0.1;
+            randSign = function() { return (Math.random() > 0.5) ? 1 : -1; };
+
+            for (var vertIndex = 0; vertIndex < geometry.vertices.length; vertIndex++) {
+                geometry.vertices[vertIndex].x += Math.random() / X_OFFSET_DAMPEN * randSign();
+                geometry.vertices[vertIndex].y += Math.random() / Y_OFFSET_DAMPEN * randSign();
+                geometry.vertices[vertIndex].z += Math.random() / Z_OFFSET_DAMPEN * randSign();
+            }
+
+            geometry.dynamic = true;
+            geometry.computeFaceNormals();
+            geometry.computeVertexNormals();
+            geometry.normalsNeedUpdate = true;
+
+        var makePlane = function(geometry) {
+            var material = new THREE.MeshLambertMaterial({color: 0xffffff, shading: THREE.FlatShading});
+            var plane = new THREE.Mesh(geometry, material);
+            return plane;
+        };
+        scene = new THREE.Scene();
+
+        spotLight = new THREE.SpotLight( 0xffffff );
+        spotLight.position.set( 150, 100, 1000 );
+        scene.add( spotLight );
+
+        camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+        camera.position.z = 100;
+        camera.position.y = -100;
+        camera.lookAt( scene.position );
+
+
+        plane = makePlane(geometry);
+        scene.add(plane);
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize( window.innerWidth-100, window.innerHeight );
+
+        timer = 0;
+        document.body.appendChild( renderer.domElement );
+        console.log(geometry);
+        X=1;
+        flag = true;
+    }
+
+    function animate() {
+        requestAnimationFrame( animate );
+
+        if(X>0&&X<70&&flag) {
+            X+=1
+            flag = true;
+        } else {
+            X-=1
+            flag = false;
+        }
+        if(X==1){
+            flag = true;
+        }
+        spotLight.position.z = -2*X
+        plane.rotation.z += 0.001
+
+        renderer.render( scene, camera );
+    }
+</script>
+</html>

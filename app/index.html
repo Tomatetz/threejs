@@ -1,0 +1,39 @@
+<!doctype html>
+<html class="no-js">
+
+<script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
+<script src="scripts/out.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Zzzzzzzzz</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/modernizr/modernizr.js"></script>
+        <script src="bower_components/threejs/build/three.js"></script>
+        <script src="scripts/keyboard.js"></script>
+        <!-- endbuild -->
+    </head>
+    <body onload='setup();'>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id='gameCanvas'></div>
+        <div id='scoreboard'>
+        </div>
+
+        <!-- build:js scripts/main.js -->
+       <!-- <script src="scripts/app.js"></script>-->
+        <script src="scripts/app2.js"></script>
+        <script src="scripts/keyboardHandler.js"></script>
+        <script src="scripts/ballPhysics.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
